@@ -2,10 +2,8 @@
 jcurl() {
   curl -s $@ | jsonator
 }
-jtwurl() {
-  twurl $@ | jsonator
-}
-otwurl() {
+
+ocurl() {
   twurl $@ | objenator
 }
 
