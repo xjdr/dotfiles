@@ -8,15 +8,11 @@ export HISTSIZE=100000
 shopt -s histappend
 
 ## extras
-[[ -s "${HOME}/.extras.bash" ]] && source "${HOME}/.extras.bash"
+[[ -s ${HOME}/.extras.bash ]] && source ${HOME}/.extras.bash
+[[ -s ${HOME}/.local.bash ]] && source ${HOME}/.local.bash
+[[ -s ${HOME}/.git-prompt.sh ]] && source ${HOME}/.git-prompt.sh
 
 export PATH=/usr/local/bin:$PATH
+export PYTHONSTARTUP=~/.pythonrc.py
 
-  source "/Users/jefrose/.git-completion.bash"
-  export PS1='[\h \[\033[0;36m\]\W\[\033[0m\]$(__git_ps1 " \[\033[1;32m\](%s)\[\033[0m\]")]\$ '
-
-source ${HOME}/.extras.bash
-
-[[ -s ${HOME}/.local.bash ]] && source ${HOME}/.local.bash
-export PYTHONSTARTUP=$HOME/.pythonrc.py
-source /Users/jefrose/.rvm/scripts/rvm
+export PS1='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\][\h \[\033[0;36m\]\W\[\033[0m\]$(__git_ps1 " \[\033[1;32m\](%s)\[\033[0m\]")]\$ '
