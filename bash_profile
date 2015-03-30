@@ -13,6 +13,7 @@ export PYTHONSTARTUP=~/.pythonrc.py
 [[ -s ${HOME}/.local.bash ]] && source ${HOME}/.local.bash
 
 export SRCPATH=$HOME/src
+export PATH=/usr/local/bin:$PATH
 
 function set-terminal-title {
   local title=$(pwd)
