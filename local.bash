@@ -13,19 +13,29 @@ alias reboot="sudo /sbin/shutdown -r now"
 alias shutdown="sudo /sbin/shutdown -h now"
 alias c='clear'                              # clear screen
 
-# ls
-alias ls='ls -GpFh'
-alias lal="ls -Al"
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  # ls
+  alias ls='ls --color=always -pFh'
+  alias lal="ls -Al"
+  #ps
+  alias psh="ps -u `whoami` -U `whoami` -o user,pid,pcpu,pmem,stat,start_time,comm -H"
+  alias psp="ps -u `whoami` -U `whoami` -o user,pid,pcpu,pmem,stat,start_time,comm --sort pcpu"
+  alias sps='ps aux | grep -v grep | grep'     # search process
+  alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 10 | sed -e 's/-bin//' | sed -e 's/-media-play//'"
+
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  # ls
+  alias ls='ls -GpFh'
+  alias lal="ls -Al"
+  #ps
+  alias psh="ps -u `whoami` -U `whoami` -o user,pid,pcpu,pmem,stat,start_time,comm -h"
+  alias sps='ps aux | grep -v grep | grep'     # search process
+  alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 10 | sed -e 's/-bin//' | sed -e 's/-media-play//'"
+fi
 
 #grep
 alias grep="grep --color=auto"
 alias f='find  . --name'
-
-#ps
-alias psh="ps -u `whoami` -U `whoami` -o user,pid,pcpu,pmem,stat,start_time,comm -H"
-alias psp="ps -u `whoami` -U `whoami` -o user,pid,pcpu,pmem,stat,start_time,comm --sort pcpu"
-alias sps='ps aux | grep -v grep | grep'     # search process
-alias psm="echo '%CPU %MEM   PID COMMAND' && ps hgaxo %cpu,%mem,pid,comm | sort -nrk1 | head -n 10 | sed -e 's/-bin//' | sed -e 's/-media-play//'"
 
 # safety features
 alias cp='cp -i'
@@ -59,4 +69,18 @@ ex ()
 # mktar - tarball wrapper
 # usage: mktar <filename | dirname>
 function mktar() { tar czf "${1%%/}.tar.gz" "${1%%/}/"; }
+
+# cd to a github repo
+function gd {
+  local parent=$(dirname "$1")
+  local name=$(basename "$1")
+  local owner=$(basename "$parent")
+  local nwo="$owner/$name"
+  local dir="$SRCPATH/$nwo"
+
+  [ -e "$dir" ] || git clone "https://github.com/$nwo" "$dir"
+
+  cd "$dir"
+}
+
 

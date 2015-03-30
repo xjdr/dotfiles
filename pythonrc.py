@@ -85,7 +85,7 @@ _c = TermColors()
 
 import sys
 # Enable Color Prompts
-sys.ps1 = '%s>>> %s' % (_c['Green'], _c['Normal'])
+sys.ps1 = '%s>>> %s' % (_c['LightBlue'], _c['Normal'])
 sys.ps2 = '%s... %s' % (_c['Red'], _c['Normal'])
 
 # Enable Pretty Printing for stdout
