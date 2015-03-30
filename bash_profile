@@ -16,12 +16,10 @@ export SRCPATH=$HOME/src
 export PATH=/usr/local/bin:$PATH
 
 function git-dirty {
-if [[ $(git status | tail -n 1) == "nothing to commit, working directory clean" ]]
+if [[ $(git status | tail -n 1) != "nothing to commit, working directory clean" ]]
 then
-    echo ""
-  else
-      echo '\033[0;31m'*''
-    fi
+    echo '\033[0;31m'*''
+fi
 }
 
 function git-unpushed {
