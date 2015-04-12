@@ -1,0 +1,22 @@
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+
+[alias]
+        cleanup = !git branch --merged | grep -v '*' | xargs git branch -d
+[github]
+  user = xjdr
+
+[hub]
+  protocol = https
+
+[push]
+  default = simple
+
+[user]
+  name = Jeff Rose
+  email = jeff.rose12@gmail.com
+
+
