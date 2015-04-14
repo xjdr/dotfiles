@@ -47,5 +47,14 @@ function __git_ps1 {
    git rev-parse --abbrev-ref HEAD 2>/dev/null
 }
 
+# Predictable SSH authentication socket location.
+SOCK="/tmp/ssh-agent-$USER-tmux"
+if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
+then
+    rm -f /tmp/ssh-agent-$USER-tmux
+    ln -sf $SSH_AUTH_SOCK $SOCK
+    export SSH_AUTH_SOCK=$SOCK
+fi
+
 export PS1='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\]\033[0;31m❤  $(set-terminal-title) | '
 #export PS1='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\][\h \[\033[0;36m\]\W\[\033[1;32m\] $(__git_ps1) \033[0m\]]\$ '
