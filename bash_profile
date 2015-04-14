@@ -15,10 +15,17 @@ export PYTHONSTARTUP=~/.pythonrc.py
 export SRCPATH=$HOME/src
 export PATH=/usr/local/bin:$PATH
 
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+bold=$(tput bold)
+reset=$(tput sgr0)
+
 function git-dirty {
 if [[ $(git status | tail -n 1) != "nothing to commit, working directory clean" ]]
 then
-    echo '\033[0;31m'*''
+    echo $yellow'★ '
 fi
 }
 
@@ -27,7 +34,7 @@ local branch=$(git rev-parse --abbrev-ref HEAD)
 
 if [[ $(git branch -v | grep $branch) == *'ahead'* ]]
 then
-  echo '\033[0;31m'$(git branch -v | grep $branch | cut -d " " -f3-5)
+  echo '$red'$(git branch -v | grep $branch | cut -d " " -f3-5)
 fi
 }
 
@@ -40,7 +47,7 @@ function set-terminal-title {
   if branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null ); then
     title="$title @ \033[1;32m$branch $(git-dirty) $(git-unpushed)"
   fi
-  echo -ne '\033[0;36m'$title'\033[0m'
+  echo -ne $blue$title
 }
 
 function __git_ps1 {
@@ -56,5 +63,5 @@ then
     export SSH_AUTH_SOCK=$SOCK
 fi
 
-export PS1='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\]\033[0;31m❤  $(set-terminal-title) | '
+export PS1='\[$red\]$([ \j -gt 0 ] && echo [\j])$reset\]$red❤  $(set-terminal-title) $bold|$reset '
 #export PS1='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\][\h \[\033[0;36m\]\W\[\033[1;32m\] $(__git_ps1) \033[0m\]]\$ '
