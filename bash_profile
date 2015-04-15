@@ -34,7 +34,7 @@ local branch=$(git rev-parse --abbrev-ref HEAD)
 
 if [[ $(git branch -v | grep $branch) == *'ahead'* ]]
 then
-  echo '$red'$(git branch -v | grep $branch | cut -d " " -f3-5)
+  echo $red$(git branch -v | grep $branch | cut -d " " -f3-5)
 fi
 }
 
