@@ -64,5 +64,5 @@ then
 fi
 
 
-export PS1='\[$red\]$([ \j -gt 0 ] && echo [\j])❤  \[$blue\]$(set-terminal-title) | \[$reset\]'
+export PS1='\[$red\]$([ \j -gt 0 ] && echo [\j])❤  \[$blue\]$(set-terminal-title) \[$bold\]| \[$reset\]'
 #export PS0='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\][\h \[\033[0;36m\]\W\[\033[1;32m\] $(__git_ps1) \033[0m\]]\$ '
