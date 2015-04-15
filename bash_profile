@@ -25,7 +25,7 @@ reset=$(tput sgr0)
 function git-dirty {
 if [[ $(git status | tail -n 1) != "nothing to commit, working directory clean" ]]
 then
-    echo $yellow'★ '
+    echo '★ '
 fi
 }
 
@@ -34,7 +34,7 @@ local branch=$(git rev-parse --abbrev-ref HEAD)
 
 if [[ $(git branch -v | grep $branch) == *'ahead'* ]]
 then
-  echo $red$(git branch -v | grep $branch | cut -d " " -f3-5)
+  echo $(git branch -v | grep $branch | cut -d " " -f3-5)
 fi
 }
 
@@ -45,9 +45,9 @@ function set-terminal-title {
   title=${title/${HOME}/\~}
 
   if branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null ); then
-    title="$title @ \033[1;32m$branch $(git-dirty) $(git-unpushed)"
+    title="$title @ $branch $(git-dirty) $(git-unpushed)"
   fi
-  echo -ne $blue$title
+  echo -ne $title
 }
 
 function __git_ps1 {
@@ -63,5 +63,6 @@ then
     export SSH_AUTH_SOCK=$SOCK
 fi
 
-export PS1='\[$red\]$([ \j -gt 0 ] && echo [\j])$reset\]$red❤  $(set-terminal-title) $bold|$reset '
-#export PS1='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\][\h \[\033[0;36m\]\W\[\033[1;32m\] $(__git_ps1) \033[0m\]]\$ '
+
+export PS1='\[$red\]$([ \j -gt 0 ] && echo [\j])❤  \[$blue\]$(set-terminal-title) | \[$reset\]'
+#export PS0='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\][\h \[\033[0;36m\]\W\[\033[1;32m\] $(__git_ps1) \033[0m\]]\$ '
