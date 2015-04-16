@@ -9,8 +9,14 @@ shopt -s histappend
 
 export PYTHONSTARTUP=~/.pythonrc.py
 
-## extras
+## Local
 [[ -s ${HOME}/.local.bash ]] && source ${HOME}/.local.bash
+
+## Java Home
+[[ -s ${HOME}/.java_home ]] && source ${HOME}/.java_home
+
+## Python Home
+[[ -s ${HOME}/.python_home ]] && source ${HOME}/.python_home
 
 export SRCPATH=$HOME/src
 export PATH=/usr/local/bin:$PATH
@@ -63,6 +69,6 @@ then
     export SSH_AUTH_SOCK=$SOCK
 fi
 
-
+PATH=$JAVA_HOME/bin:$PYTHON_HOME/bin:$PATH
 export PS1='\[$red\]$([ \j -gt 0 ] && echo [\j])❤  \[$blue\]$(set-terminal-title) \[$bold\]| \[$reset\]'
 #export PS0='\[\033[0;31m\]$([ \j -gt 0 ] && echo [\j])\033[0m\][\h \[\033[0;36m\]\W\[\033[1;32m\] $(__git_ps1) \033[0m\]]\$ '
