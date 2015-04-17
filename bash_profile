@@ -62,11 +62,15 @@ function __git_ps1 {
 
 # Predictable SSH authentication socket location.
 SOCK="/tmp/ssh-agent-$USER-tmux"
-if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
-then
+if [[ ! -z "$TMUX" ]]; then
+  if [[ "$SSH_AUTH_SOCK" != "$SOCK" ]]; then
+    export SSH_AUTH_SOCK="$SOCK"
+  fi
+else
+  if [[ ! -z "$SSH_AUTH_SOCK" ]] && [[ "$SSH_AUTH_SOCK" != $(readlink "$SOCK") ]]; then
     rm -f /tmp/ssh-agent-$USER-tmux
     ln -sf $SSH_AUTH_SOCK $SOCK
-    export SSH_AUTH_SOCK=$SOCK
+  fi
 fi
 
 PATH=$JAVA_HOME/bin:$PYTHON_HOME/bin:$PATH
