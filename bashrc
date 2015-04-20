@@ -1,4 +1,3 @@
-export CC=/usr/bin/gcc
 export LC_CTYPE=en_US.UTF-8
 export CLICOLOR=1
 export LSCOLORS=gxGxFxdxbxDxDxBxBxExEx
@@ -7,6 +6,7 @@ export HISTCONTROL=erasedups
 export HISTSIZE=100000
 shopt -s histappend
 
+export EDITOR=vim
 export PYTHONSTARTUP=~/.pythonrc.py
 
 ## Local
