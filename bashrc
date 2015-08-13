@@ -6,6 +6,7 @@ export HISTCONTROL=erasedups
 export HISTSIZE=100000
 shopt -s histappend
 
+export TERM=xterm-256color
 export EDITOR=vim
 export PYTHONSTARTUP=~/.pythonrc.py
 
